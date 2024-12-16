@@ -1,7 +1,7 @@
-import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import {NavbarProperties} from './NavbarPropperies'
 
-const Navbar: React.FC = () => {
+const Navbar = ({ toggleSidebar }: NavbarProperties) => {
     return (
     <AppBar position="fixed" style={{ backgroundColor: '#333', display: 'flex', position: "absolute", zIndex: 1201}}>
         <Toolbar>
@@ -9,6 +9,7 @@ const Navbar: React.FC = () => {
             Склад товаров
         </Typography>
         <Box>
+            <Button color="inherit" onClick={toggleSidebar}>Боковая панель</Button>
             <Button color="inherit">Товары</Button>
             <Button color="inherit">Склады</Button>
             <Button color="inherit">О системе</Button>

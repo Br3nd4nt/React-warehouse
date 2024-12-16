@@ -1,31 +1,15 @@
-import React, { useState } from 'react';
-import { Drawer, TextField, FormControlLabel, Checkbox, Select, MenuItem, Box, IconButton} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
+import { Drawer, TextField, FormControlLabel, Checkbox, Select, MenuItem, Box} from '@mui/material';
+import { SidebarProperties } from './SidebarProperties'
 
-const Sidebar: React.FC = () => {
-    const [isOpen, setIsOpen] = useState(true);
+const Sidebar = ({ isOpen } : SidebarProperties) => {
 
-    const toggleSidebar = () => {
-        setIsOpen(!isOpen);
-      };
+
+    // const toggleSidebar = () => {
+    //     setIsOpen(!isOpen);
+    //   };
       
     return (
     <Box>
-              {/* Кнопка управления */}
-      <IconButton
-        onClick={toggleSidebar}
-        style={{
-          position: 'absolute',
-          left: isOpen ? 255 : 0,
-          top: 69,
-          zIndex: 1300,
-          transition: 'width 0.3s',
-          backgroundColor: 'white',
-        }}
-      >
-        {isOpen ? <CloseIcon /> : <MenuIcon />}
-      </IconButton>
       <Box style={{ padding: '20px', display: isOpen ? 'block' : 'none' }}>
             <Drawer variant="persistent" anchor="left" open={isOpen}
             PaperProps={{

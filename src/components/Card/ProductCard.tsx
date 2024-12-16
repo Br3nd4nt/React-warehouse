@@ -1,4 +1,3 @@
-import react from 'react';
 import {Card, CardContent, Typography, CardMedia, Box} from '@mui/material';
 
 interface ProductCardProps {
@@ -15,7 +14,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, description, category, 
         <Card style={{ width: 300, margin: '10px', display: 'flex', flexDirection: 'column' }}>
         <Box>
             {image ? (
-            <CardMedia component="img" height="140" image={image} alt={name} />
+            <CardMedia component="img" height="140" image={image} alt={name} style={{objectFit: "contain"}}/>
             ) : (
             <Typography align="center" style={{ height: 140, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f0f0f0' }}>
                 Нет изображения
