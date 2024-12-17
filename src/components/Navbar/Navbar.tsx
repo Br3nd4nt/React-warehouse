@@ -1,9 +1,10 @@
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { Toolbar, Typography, Button, Box } from '@mui/material';
 import {NavbarProperties} from './NavbarPropperies'
+import { StyledAppBar } from './style';
 
 const Navbar = ({ toggleSidebar }: NavbarProperties) => {
     return (
-    <AppBar position="fixed" style={{ backgroundColor: '#333', display: 'flex', position: "absolute", zIndex: 1201}}>
+    <StyledAppBar>
         <Toolbar>
         <Typography variant="h6" style={{ flexGrow: 1 }}>
             Склад товаров
@@ -16,7 +17,7 @@ const Navbar = ({ toggleSidebar }: NavbarProperties) => {
             <Button color="inherit">Личный кабинет</Button>
         </Box>
         </Toolbar>
-    </AppBar>
+    </StyledAppBar>
     );
 };
 

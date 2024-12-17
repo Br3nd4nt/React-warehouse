@@ -1,6 +1,6 @@
-import {Card, CardContent, Typography, CardMedia, Box} from '@mui/material';
-
-interface ProductCardProps {
+import {CardContent, CardMedia, Box, Tooltip} from '@mui/material';
+import { ProductCardCategory, ProductCardDescription, ProductCardQuantity, ProductCardTitle, ProductCardWrapper, ProductCardImageAltText } from './style';
+export interface ProductCardProps {
     name: string;
     description: string;
     category: string;
@@ -11,29 +11,39 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ name, description, category, quantity, unit, image }) => {
     return (
-        <Card style={{ width: 300, margin: '10px', display: 'flex', flexDirection: 'column' }}>
+        <Tooltip title={
+            <div>
+                {description.length > 100 ? `${description.slice(0, 300)}...` : description}
+            </div>
+        }>
+
+        <ProductCardWrapper>
+
+            
         <Box>
             {image ? (
             <CardMedia component="img" height="140" image={image} alt={name} style={{objectFit: "contain"}}/>
             ) : (
-            <Typography align="center" style={{ height: 140, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f0f0f0' }}>
+            <ProductCardImageAltText align="center">
                 Нет изображения
-            </Typography>
+            </ProductCardImageAltText>
             )}
         </Box>
         <CardContent>
-            <Typography variant="h6" fontWeight="bold">
-            {name}
-            </Typography>
-            <Typography variant="body2" color="text.secondary" noWrap>
-            {description.length > 100 ? `${description.slice(0, 100)}...` : description}
-            </Typography>
-            <Typography variant="body2">Категория: {category}</Typography>
-            <Typography variant="body2">
+            <ProductCardTitle>{name}</ProductCardTitle>
+
+            <ProductCardDescription noWrap>
+                {description.length > 100 ? `${description.slice(0, 100)}...` : description}
+            </ProductCardDescription>
+
+            <ProductCardCategory>Категория: {category}</ProductCardCategory>
+
+            <ProductCardQuantity>
             Количество: {quantity} {unit}
-            </Typography>
+            </ProductCardQuantity>
         </CardContent>
-        </Card>
+        </ProductCardWrapper>
+        </Tooltip>
     );
     };
 

@@ -2,29 +2,16 @@ import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import ProductCard from "../Card/ProductCard";
 import ProductCardModal from "../Card/ProductCardModal";
+import { StyledPagination } from "./style";
+import { ProductListProps } from "./ProductListPropperties";
 
-const testData = [
-  {
-    name: "Товар 1",
-    description: "Описание товара 1",
-    category: "Категория A",
-    quantity: 10,
-    unit: "шт",
-    image: "https://i.pinimg.com/736x/60/6b/72/606b728cf4b84803f6d48b6bba5cb686.jpg",
-  },
-  {
-    name: "Товар 2",
-    description: "Длинное описание товара 2".repeat(5),
-    category: "Категория B",
-    quantity: 5,
-    unit: "шт",
-    image: null,
-  },
-];
-
-const ProductList: React.FC = () => {
+const ProductList = ({items} : ProductListProps) => {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isModalOpen, setModalOpen] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 15;
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
 
     const handleCardClick = (product: any) => {
         setSelectedProduct(product);
@@ -36,19 +23,27 @@ const ProductList: React.FC = () => {
         setSelectedProduct(null);
     }
 
+    const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
+        setCurrentPage(value);
+    };
 
     return (
         <>
-        <Grid container spacing={2} justifyContent="flex-start">
-        {testData.map((product, index) => (
+        <Grid container spacing={2} justifyContent="space-evenly" alignItems="center" marginTop="10px">
+        {(items.slice(startIndex, startIndex + itemsPerPage)).map((product, index) => (
             <Grid item key={index}>
                 <div onClick={() => handleCardClick(product)}>
-                    <ProductCard {...product} />
+                    <ProductCard {... product} />
                 </div>
             </Grid>
         ))}
         </Grid>
 
+        <StyledPagination
+            count={Math.ceil(items.length / itemsPerPage)}
+            page={currentPage}
+            onChange={handlePageChange}
+        />
         <ProductCardModal open={isModalOpen} onClose={handleCloseModal} product={selectedProduct}/>
         </>
     );
